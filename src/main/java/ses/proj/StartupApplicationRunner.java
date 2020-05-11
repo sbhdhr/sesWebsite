@@ -5,8 +5,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import ses.proj.entity.AlertType;
-import ses.proj.entity.DefaultAlerts;
 import ses.proj.repository.AlertTypeRepo;
 
 @Component
@@ -17,7 +15,7 @@ public class StartupApplicationRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-
+//
 //		System.out.println("Adding default alerts..");
 //		for (AlertType at : DefaultAlerts.getDefaultAlerts()) {
 //			atrepo.save(at);

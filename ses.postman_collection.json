@@ -70,17 +70,16 @@
 					}
 				},
 				"url": {
-					"raw": "https://ses-project-bitsme.herokuapp.com/api/alert/3",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/alert/4",
+					"protocol": "http",
 					"host": [
-						"ses-project-bitsme",
-						"herokuapp",
-						"com"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"api",
 						"alert",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -182,6 +181,27 @@
 						"api",
 						"alerttype",
 						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Max Inc Alert Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/alert/max",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"alert",
+						"max"
 					]
 				}
 			},

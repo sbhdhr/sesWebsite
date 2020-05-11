@@ -1,5 +1,6 @@
 package ses.proj.controller;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,21 @@ public class IncomingAlertController {
 		List<IncomingAlert> alerts = (List<IncomingAlert>) iarepo.findAll();
 
 		return new ResponseEntity<List<IncomingAlert>>(alerts, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/max")
+	public ResponseEntity<?> getMaxIncAlertId() {
+
+		Object ido = iarepo.getMaxIncAlertId();
+		Long id;
+		if(ido !=null) {
+			BigInteger idbi = (BigInteger)ido;
+			id = idbi.longValue();
+		}else {
+			id=0L;
+		}
+		return new ResponseEntity<Long>(id, HttpStatus.OK);
 
 	}
 
