@@ -53,19 +53,18 @@ public class AlertTypeController {
 			return new ResponseEntity<AlertType>(response, HttpStatus.CREATED);
 		}
 	}
-	
+
 	@DeleteMapping("/{alertTypeId}")
 	public ResponseEntity<?> deleteAlert(@PathVariable Long alertTypeId) {
-		//System.out.println("delete ::"+alertId);
-		HashMap<String, String> res= new HashMap<String, String>();
-		
-		if (atrepo.existsById(alertTypeId))
-		{
+		// System.out.println("delete ::"+alertId);
+		HashMap<String, String> res = new HashMap<String, String>();
+
+		if (atrepo.existsById(alertTypeId)) {
 			atrepo.deleteById(alertTypeId);
-			res.put("success", "Alert :: "+alertTypeId+" deleted.");
+			res.put("success", "Alert :: " + alertTypeId + " deleted.");
 			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.OK);
-		}else {
-			res.put("error", "Alert :: "+alertTypeId+" is invalid.");
+		} else {
+			res.put("error", "Alert :: " + alertTypeId + " is invalid.");
 			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.BAD_REQUEST);
 		}
 	}

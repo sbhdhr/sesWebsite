@@ -34,21 +34,22 @@ public class IncomingAlertController {
 	public ResponseEntity<?> getAllAlerts() {
 
 		List<IncomingAlert> alerts = (List<IncomingAlert>) iarepo.findAll();
+		// System.out.println("i am being called");
 
 		return new ResponseEntity<List<IncomingAlert>>(alerts, HttpStatus.OK);
 
 	}
-	
+
 	@GetMapping("/max")
 	public ResponseEntity<?> getMaxIncAlertId() {
 
 		Object ido = iarepo.getMaxIncAlertId();
 		Long id;
-		if(ido !=null) {
-			BigInteger idbi = (BigInteger)ido;
+		if (ido != null) {
+			BigInteger idbi = (BigInteger) ido;
 			id = idbi.longValue();
-		}else {
-			id=0L;
+		} else {
+			id = 0L;
 		}
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
 
@@ -65,24 +66,23 @@ public class IncomingAlertController {
 			alert = iarepo.save(alert);
 			return new ResponseEntity<IncomingAlert>(alert, HttpStatus.CREATED);
 		}
-		HashMap<String, String> res= new HashMap<String, String>();
-		res.put("error", "Alert Value "+alertType+" is invalid.");
+		HashMap<String, String> res = new HashMap<String, String>();
+		res.put("error", "Alert Value " + alertType + " is invalid.");
 		return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.BAD_REQUEST);
 
 	}
-	
+
 	@DeleteMapping("/{alertId}")
 	public ResponseEntity<?> deleteAlert(@PathVariable Long alertId) {
-		//System.out.println("delete ::"+alertId);
-		HashMap<String, String> res= new HashMap<String, String>();
-		
-		if (iarepo.existsById(alertId))
-		{
+		// System.out.println("delete ::"+alertId);
+		HashMap<String, String> res = new HashMap<String, String>();
+
+		if (iarepo.existsById(alertId)) {
 			iarepo.deleteById(alertId);
-			res.put("success", "Alert :: "+alertId+" deleted.");
+			res.put("success", "Alert :: " + alertId + " deleted.");
 			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.OK);
-		}else {
-			res.put("error", "Alert :: "+alertId+" is invalid.");
+		} else {
+			res.put("error", "Alert :: " + alertId + " is invalid.");
 			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.BAD_REQUEST);
 		}
 	}

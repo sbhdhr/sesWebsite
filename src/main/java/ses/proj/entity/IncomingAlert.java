@@ -22,8 +22,9 @@ public class IncomingAlert {
 	@NotNull(message = "Desc cannot be null")
 	private String description;
 
-	//@JsonFormat(pattern = "dd-mm-yyyy HH:mm:ss", timezone = JsonFormat.DEFAULT_TIMEZONE)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "IST")
+	// @JsonFormat(pattern = "dd-mm-yyyy HH:mm:ss", timezone =
+	// JsonFormat.DEFAULT_TIMEZONE)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "IST")
 	@CreationTimestamp
 	private Date createdAt;
 
