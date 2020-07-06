@@ -1,6 +1,7 @@
 package ses.proj.controller;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -81,6 +83,34 @@ public class IncomingAlertController {
 		if (iarepo.existsById(alertId)) {
 			iarepo.deleteById(alertId);
 			res.put("success", "Alert :: " + alertId + " deleted.");
+			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.OK);
+		} else {
+			res.put("error", "Alert :: " + alertId + " is invalid.");
+			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PutMapping("/{alertId}")
+	public ResponseEntity<?> handleAlert(@PathVariable Long alertId) {
+		HashMap<String, String> res = new HashMap<String, String>();
+
+		Optional<IncomingAlert> alertOpt = iarepo.findById(alertId);
+		if(alertOpt.isPresent()) {
+			List<IncomingAlert> alerts = iarepo.getAllAlertsForEventId(alertOpt.get().getEventId());
+			Long[] ids = new Long[alerts.size()];
+			int c=0;
+			for(IncomingAlert a : alerts) {
+				a.setHandled(true);
+				ids[c++]=a.getId();
+			}
+			iarepo.saveAll(alerts);
+			String msg = "Alert :: ";
+			for(Long l:ids) {
+				msg=msg+" "+l.toString();
+			}
+			msg = msg + " updated.";
+					
+			res.put("success", msg );
 			return new ResponseEntity<HashMap<String, String>>(res, HttpStatus.OK);
 		} else {
 			res.put("error", "Alert :: " + alertId + " is invalid.");

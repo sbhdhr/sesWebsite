@@ -28,7 +28,7 @@ public class BinalertApplication extends SpringBootServletInitializer{
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("http://localhost:3000",
 						"https://smart-wastebin-system.herokuapp.com")
-                .allowedMethods("GET", "POST", "DELETE");
+                .allowedMethods("GET", "POST", "DELETE","PUT");
             }
         };
     }
