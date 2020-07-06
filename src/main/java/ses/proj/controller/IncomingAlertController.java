@@ -55,13 +55,14 @@ public class IncomingAlertController {
 
 	}
 
-	@PostMapping("/{alertType}")
-	public ResponseEntity<?> createAlert(@PathVariable Long alertType) {
+	@PostMapping("/{eventId}/{alertType}")
+	public ResponseEntity<?> createAlert(@PathVariable Long eventId,@PathVariable Long alertType) {
 
 		Optional<AlertType> typeOpt = atrepo.findById(alertType);
 		if (typeOpt.isPresent()) {
 			IncomingAlert alert = new IncomingAlert();
 			alert.setDesc(typeOpt.get().getDesc());
+			alert.setEventId(eventId);
 
 			alert = iarepo.save(alert);
 			return new ResponseEntity<IncomingAlert>(alert, HttpStatus.CREATED);

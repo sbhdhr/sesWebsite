@@ -22,6 +22,10 @@ public class IncomingAlert {
 	@NotNull(message = "Desc cannot be null")
 	private String description;
 
+	private Long eventId;
+
+	private boolean isHandled;
+
 	// @JsonFormat(pattern = "dd-mm-yyyy HH:mm:ss", timezone =
 	// JsonFormat.DEFAULT_TIMEZONE)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "IST")
@@ -31,10 +35,13 @@ public class IncomingAlert {
 	public IncomingAlert() {
 	}
 
-	public IncomingAlert(Long id, @NotNull(message = "Desc cannot be null") String desc, Date createdAt) {
+	public IncomingAlert(Long id, @NotNull(message = "Desc cannot be null") String desc, Long eventId,
+			Date createdAt) {
 		this.id = id;
 		this.description = desc;
+		this.eventId = eventId;
 		this.createdAt = createdAt;
+		this.isHandled = false;
 	}
 
 //	@PrePersist
@@ -66,9 +73,26 @@ public class IncomingAlert {
 		this.createdAt = createdAt;
 	}
 
+	public Long getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
+
+	public boolean isHandled() {
+		return isHandled;
+	}
+
+	public void setHandled(boolean isHandled) {
+		this.isHandled = isHandled;
+	}
+
 	@Override
 	public String toString() {
-		return "IncomingAlert [id=" + id + ", desc=" + description + ", createdAt=" + createdAt + "]";
+		return "IncomingAlert [id=" + id + ", description=" + description + ", eventId=" + eventId + ", isHandled="
+				+ isHandled + ", createdAt=" + createdAt + "]";
 	}
 
 }
