@@ -16,4 +16,7 @@ public interface IncomingAlertRepo extends CrudRepository<IncomingAlert, Long>{
 	
 	@Query(value = "select * from incoming_alert where event_id=?1", nativeQuery = true)
 	List<IncomingAlert> getAllAlertsForEventId(Long eventId);
+	
+	@Query(value = "select * from incoming_alert order by id", nativeQuery = true)
+	List<IncomingAlert> getAllAlerts();
 }

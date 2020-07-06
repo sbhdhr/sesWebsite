@@ -1,7 +1,6 @@
 package ses.proj.controller;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +34,7 @@ public class IncomingAlertController {
 	@GetMapping("/all")
 	public ResponseEntity<?> getAllAlerts() {
 
-		List<IncomingAlert> alerts = (List<IncomingAlert>) iarepo.findAll();
+		List<IncomingAlert> alerts = iarepo.getAllAlerts();
 		// System.out.println("i am being called");
 
 		return new ResponseEntity<List<IncomingAlert>>(alerts, HttpStatus.OK);
